@@ -16,7 +16,7 @@ export default function AnimationContext({ children }) {
         initial={{}}
         animate={{}}
         exit={{}}
-        className="w-full h-full">
+        className="h-full w-full">
         {children}
       </motion.div>
     </AnimatePresence>

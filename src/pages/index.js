@@ -1,83 +1,51 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState } from "react";
-import localFont from "@next/font/local";
-import { motion, useAnimate } from "framer-motion";
+import { caffeineMono, majorMono } from "@/assets/fonts/fonts";
+import { motion } from "framer-motion";
 import MenuComponent from "../components/MenuComponent";
 import SocialMedia from "../components/SocialMedia";
 import MainBlock from "../components/MainBlock";
-import Link from "next/link";
 import Image from "next/image";
 import ZevPortrait from "../assets/zev.webp";
-
-const majorMono = localFont({
-  src: "../assets/fonts/MajorMonoDisplay-Regular.ttf",
-});
-
-const caffeineMono = localFont({
-  src: "../assets/fonts/CaffeineMono.otf",
-});
+import ZevLogo from "@/components/ZevLogo";
 
 export default function Home() {
   return (
-    <>
-      <div className="flex justify-center flex-col items-center h-full">
+    <motion.div className="h-full w-full origin-bottom">
+      <div className="flex h-full flex-col items-center justify-center">
         <div className="relative w-0">
-          <div layout className={`${majorMono.className}`}>
-            <span
-              className={`absolute ${majorMono.className} text-3xl -top-[100px] -left-[150px] overflow-hidden zj-10`}>
-              <Link href="/">ZEV ROSS</Link>
-            </span>
-          </div>
-          <motion.div
+          <ZevLogo className="absolute left-[-8rem] top-[-3rem] z-20" />
+          <div
             layoutId="menu"
-            className={`absolute ${caffeineMono.className} rounded -top-[125px] -left-4 z-10`}>
-            <MenuComponent className={`p-4 bg-gray-900`} start={4} end={10} />
-          </motion.div>
+            className={`absolute ${caffeineMono.className} -left-4 -top-[125px] z-10 rounded`}>
+            <MenuComponent className={`bg-gray-900 p-4`} start={4} end={10} />
+          </div>
         </div>
-        <MainBlock>
-          <motion.div
-            initial={{
-              letterSpacing: "normal",
-              fontWeight: "normal",
-              opacity: 0,
-            }}
-            animate={{
-              letterSpacing: ".2rem",
-              fontWeight: "bold",
-              opacity: 1,
-            }}
-            exit={{ opacity: 0, transition: { duration: 0.1 } }}
-            transition={{ delay: 0.5 }}
-            className="flex items-center">
-            DIGITAL ARTIST
-          </motion.div>
-          <motion.div
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 0.6,
-              transition: { duration: 0.1, delay: 0.6 },
-            }}
-            exit={{ opacity: 0, transition: { duration: 0.1 } }}
-            className="text-sm tracking-wider mt-1">
+        <motion.div
+          initial={{ scale: 0.8 }}
+          animate={{ scale: 1, transition: { delay: 0.3 } }}
+          exit={{ opacity: 0, transition: { delay: 0.1 } }}
+          className={`flex flex-col items-center justify-center rounded-xl border-4 border-gray-800 bg-gray-900 px-10 py-8 text-slate-400`}>
+          <div className="flex items-center">DIGITAL ARTIST</div>
+          <div className="mt-1 text-sm tracking-wider">
             he/him ・ @zevcandraw
-          </motion.div>
-        </MainBlock>
+          </div>
+        </motion.div>
       </div>
-      <motion.div className="absolute bottom-[20%] right-[20%] max-w-[10rem] overflow-hidden w-[8rem] h-[8rem] rounded">
+      <motion.div
+        className="absolute bottom-[20%] right-[20%] h-[8rem] w-[8rem] max-w-[10rem] overflow-hidden rounded"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 20 }}>
         <Image
           src={ZevPortrait}
           alt="Portrait of Zev Ross"
-          style={{
-            objectFit: "cover",
-            transform: "scale(2.7) translate(0, 27%)",
-          }}
           fill={true}
+          sizes="100%"
+          className="origin-top scale-150 object-cover"
         />
       </motion.div>
       <SocialMedia className="bottom-14 left-10" />
-    </>
+    </motion.div>
   );
 }

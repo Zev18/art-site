@@ -1,24 +1,20 @@
 "use client";
 
-import localFont from "@next/font/local";
+import { caffeineMono, majorMono } from "@/assets/fonts/fonts";
 import { motion } from "framer-motion";
-import MenuComponent from "../components/MenuComponent";
-import SocialMedia from "../components/SocialMedia";
-import MainBlock from "../components/MainBlock";
-import Link from "next/link";
-
-const majorMono = localFont({
-  src: "../assets/fonts/MajorMonoDisplay-Regular.ttf",
-});
-
-const caffeineMono = localFont({
-  src: "../assets/fonts/CaffeineMono.otf",
-});
+import ZevLogo from "@/components/ZevLogo";
+import SocialMedia from "@/components/SocialMedia";
 
 const container = {
   show: {
     transition: {
       staggerChildren: 0.2,
+      duration: 0.1,
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
       duration: 0.1,
     },
   },
@@ -34,51 +30,23 @@ const item = {
   },
 };
 
+function yearsSinceBirthday() {
+  const date = new Date("2001-07-10");
+  const currentDate = new Date();
+  const yearDifference = currentDate.getFullYear() - date.getFullYear();
+
+  // Check if the current month and day is before the date's month and day
+  const isBeforeMonthDay =
+    currentDate.getMonth() < date.getMonth() ||
+    (currentDate.getMonth() === date.getMonth() &&
+      currentDate.getDate() < date.getDate());
+
+  // Subtract 1 from the year difference if the current date is before the date's month and day
+  const yearsPassed = isBeforeMonthDay ? yearDifference - 1 : yearDifference;
+
+  return yearsPassed;
+}
+
 export default function page() {
-  return (
-    <>
-      <div className="flex justify-center flex-col items-center h-full">
-        <div className="relative w-0">
-          <motion.div layoutId="zev">
-            <motion.span
-              className={`absolute ${majorMono.className} text-3xl -top-[100px] -left-[150px] overflow-hidden z-10`}>
-              <Link href="/">ZEV ROSS</Link>
-            </motion.span>
-          </motion.div>
-          <motion.div
-            layoutId="menu"
-            className={`absolute ${caffeineMono.className} bg-gray-900 rounded -top-[125px] -left-4 z-10`}></motion.div>
-        </div>
-        <MainBlock>
-          <motion.div
-            initial="hidden"
-            animate="show"
-            variants={container}
-            className="flex flex-col items-end ">
-            <motion.span
-              variants={item}
-              className="text-right whitespace-nowrap overflow-hidden">
-              21
-            </motion.span>
-            <motion.span
-              variants={item}
-              className="text-right whitespace-nowrap overflow-hidden">
-              he/him
-            </motion.span>
-            <motion.span
-              variants={item}
-              className="text-right whitespace-nowrap overflow-hidden">
-              Jewish
-            </motion.span>
-            <motion.span
-              variants={item}
-              className="text-right whitespace-nowrap overflow-hidden">
-              ENG / עבר / 日本語
-            </motion.span>
-          </motion.div>
-        </MainBlock>
-      </div>
-      <SocialMedia className="bottom-14 left-10" />
-    </>
-  );
+  return <motion.div className="h-full w-full">Test</motion.div>;
 }

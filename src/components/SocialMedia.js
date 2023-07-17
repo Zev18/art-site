@@ -1,18 +1,14 @@
 import React from "react";
-import Link from "next/link";
 import { Instagram, Twitter, Mail } from "react-feather";
 import pixiv from "../../public/Pixiv_Icon.svg";
 import kofi from "../../public/ko-fi.svg";
 import Image from "next/image";
-import localFont from "@next/font/local";
+import localFont from "next/font/local";
 import { motion } from "framer-motion";
-
-const caffeineMono = localFont({
-  src: "../assets/fonts/CaffeineMono.otf",
-});
+import { caffeineMono } from "@/assets/fonts/fonts";
 
 export default function SocialMedia(props) {
-  const { className } = props;
+  const { className, initial, animate, exit, onAnimationComplete } = props;
   const iconSize = 20;
 
   const linkHover = {
@@ -25,7 +21,7 @@ export default function SocialMedia(props) {
   };
 
   const textReveal = {
-    rest: { width: 0 },
+    rest: { width: "0px" },
     hover: {
       width: "max-content",
       transition: { duration: 0.1, ease: "easeInOut" },
@@ -35,43 +31,53 @@ export default function SocialMedia(props) {
   return (
     <>
       <motion.div
-        layoutId="social"
-        className={`absolute ${className} ${caffeineMono.className}`}>
-        <div className="flex gap-1 border-l-2 border-cyan-400 w-0">
-          <ul className="flex flex-col gap-4 ml-4">
-            <motion.li
-              animate="rest"
-              initial="rest"
-              whileHover="hover"
-              whileTap="hover"
-              variants={linkHover}>
-              <Link href={"#"} className="flex gap-4 items-center">
+        key={"social"}
+        initial={{ x: -10, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        exit={{ x: -10, opacity: 0 }}
+        className={`absolute ${className} ${caffeineMono.className}`}
+        onAnimationComplete={onAnimationComplete}>
+        <div className="flex w-0 gap-1 border-l-2 border-cyan-400">
+          <ul className="ml-4 flex flex-col gap-4">
+            <li>
+              <motion.a
+                href={"https://www.instagram.com/zevcandraw/"}
+                className="flex items-center gap-4"
+                animate="rest"
+                initial="rest"
+                whileHover="hover"
+                whileTap="hover"
+                variants={linkHover}>
                 <Instagram size={iconSize} />
                 <motion.span variants={textReveal} className="overflow-hidden">
                   Instagram
                 </motion.span>
-              </Link>
-            </motion.li>
-            <motion.li
-              animate="rest"
-              initial="rest"
-              whileHover="hover"
-              whileTap="hover"
-              variants={linkHover}>
-              <Link href={"#"} className="flex gap-4 items-center">
+              </motion.a>
+            </li>
+            <li>
+              <motion.a
+                href={"https://twitter.com/zevcandraw"}
+                className="flex items-center gap-4"
+                animate="rest"
+                initial="rest"
+                whileHover="hover"
+                whileTap="hover"
+                variants={linkHover}>
                 <Twitter size={iconSize} />
                 <motion.span variants={textReveal} className="overflow-hidden">
                   Twitter
                 </motion.span>
-              </Link>
-            </motion.li>
-            <motion.li
-              animate="rest"
-              initial="rest"
-              whileHover="hover"
-              whileTap="hover"
-              variants={linkHover}>
-              <Link href={"#"} className="flex gap-4 items-center">
+              </motion.a>
+            </li>
+            <li>
+              <motion.a
+                href={"https://www.pixiv.net/en/users/94752212"}
+                className="flex min-w-max items-center gap-4"
+                animate="rest"
+                initial="rest"
+                whileHover="hover"
+                whileTap="hover"
+                variants={linkHover}>
                 <Image
                   alt={"Pixiv"}
                   src={pixiv}
@@ -81,15 +87,17 @@ export default function SocialMedia(props) {
                 <motion.span variants={textReveal} className="overflow-hidden">
                   Pixiv
                 </motion.span>
-              </Link>
-            </motion.li>
-            <motion.li
-              animate="rest"
-              initial="rest"
-              whileHover="hover"
-              whileTap="hover"
-              variants={linkHover}>
-              <Link href={"#"} className="flex gap-4 items-center">
+              </motion.a>
+            </li>
+            <li>
+              <motion.a
+                href={"https://ko-fi.com/zevross"}
+                className="flex min-w-max items-center gap-4"
+                animate="rest"
+                initial="rest"
+                whileHover="hover"
+                whileTap="hover"
+                variants={linkHover}>
                 <Image
                   alt={"Ko-Fi"}
                   src={kofi}
@@ -102,21 +110,23 @@ export default function SocialMedia(props) {
                   className="overflow-hidden whitespace-nowrap">
                   Ko-fi
                 </motion.span>
-              </Link>
-            </motion.li>
-            <motion.li
-              animate="rest"
-              initial="rest"
-              whileHover="hover"
-              whileTap="hover"
-              variants={linkHover}>
-              <Link href={"#"} className="flex gap-4 items-center">
+              </motion.a>
+            </li>
+            <li>
+              <motion.a
+                href="mailto:zevross@gmail.com"
+                className="flex items-center gap-4"
+                animate="rest"
+                initial="rest"
+                whileHover="hover"
+                whileTap="hover"
+                variants={linkHover}>
                 <Mail size={iconSize} />
                 <motion.span variants={textReveal} className="overflow-hidden">
                   Email
                 </motion.span>
-              </Link>
-            </motion.li>
+              </motion.a>
+            </li>
           </ul>
         </div>
       </motion.div>

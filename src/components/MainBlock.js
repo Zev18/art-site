@@ -3,12 +3,20 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export default function MainBlock({ children, className }) {
+export default function MainBlock({
+  children,
+  className,
+  initial,
+  animate,
+  exit,
+}) {
   return (
     <motion.div
-      layoutId="mainBlock"
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className={`rounded-xl bg-gray-900 border-4 border-gray-800 px-10 py-8 flex flex-col justify-center items-center ${className}`}>
+      initial={initial}
+      animate={animate}
+      exit={exit}
+      className={`flex flex-col items-center justify-center rounded-xl border-4 border-gray-800 bg-gray-900 px-10 py-8 ${className}`}>
       {children}
     </motion.div>
   );
