@@ -1,9 +1,15 @@
 "use client";
 
 import { caffeineMono, majorMono } from "@/assets/fonts/fonts";
-import { motion } from "framer-motion";
-import ZevLogo from "@/components/ZevLogo";
-import SocialMedia from "@/components/SocialMedia";
+import {
+  easeInOut,
+  easeOut,
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import ZevPortrait from "../assets/zev.webp";
+import Image from "next/image";
 
 const container = {
   show: {
@@ -47,6 +53,92 @@ function yearsSinceBirthday() {
   return yearsPassed;
 }
 
-export default function page() {
-  return <motion.div className="h-full w-full">Test</motion.div>;
+const useParallax = (value) => {
+  return useTransform(value, [0, 1], ["0%", "95%"]);
+};
+
+export default function About() {
+  const { scrollYProgress } = useScroll();
+  const y = useParallax(scrollYProgress);
+
+  return (
+    <motion.div className="relative overflow-x-hidden duration-200">
+      <motion.div
+        style={{ y }}
+        className="z-0 m-8"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.8 }}
+        transition={{ ease: easeInOut, duration: 0.2 }}>
+        <Image
+          priority
+          src={ZevPortrait}
+          alt="Portrait of Zev Ross"
+          className="rounded-xl object-cover"
+        />
+      </motion.div>
+
+      <motion.div
+        className="relative z-20 flex h-full w-full flex-col items-center"
+        initial={{ y: 100, scale: 0.8, opacity: 0 }}
+        animate={{
+          y: 0,
+          scale: 1,
+          opacity: 1,
+          transition: { ease: easeInOut, duration: 0.3 },
+        }}
+        exit={{
+          y: 50,
+          scale: 1,
+          opacity: 0,
+          transition: { ease: easeOut, duration: 0.2 },
+        }}>
+        <motion.div className="mx-8 mb-32 min-h-max overflow-x-visible rounded-xl bg-slate-800/80 text-slate-400 backdrop-blur">
+          <div className="flex items-center justify-between gap-3 px-6 py-4">
+            <h1 className={`${majorMono.className} text-2xl text-white`}>
+              ZEV ROSS
+            </h1>
+            {/* eslint-disable-next-line react/jsx-no-comment-textnodes */}
+            <p className={`${caffeineMono.className} translate-y-1`}>
+              //profile
+            </p>
+          </div>
+          <div
+            className={`relative text-white ${caffeineMono.className} bg-gray-950 p-4`}>
+            <ul className="border-l-2 pl-4">
+              <li>
+                <p>{yearsSinceBirthday()} years old</p>
+              </li>
+              <li>
+                <p>Jewish</p>
+              </li>
+              <li>
+                <p>Canadian-American</p>
+              </li>
+              <li>
+                <p>
+                  ENG /<span className="font-mono"> עבר </span>/ 日本語
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div className="flex flex-col gap-4 p-6 pt-4">
+            <p className="text-xl font-bold text-white">
+              {"My name is Zev, and I'm an artist."}
+            </p>{" "}
+            <p>{`I started getting into art in July
+            2017 at the age of 16, when I was reading a comic I liked so much
+            that it made me want to make some fanart for it. I've been making art ever since then.`}</p>
+            <p>{` I've come a long way, though. I've managed to gain a
+            small following on social media over the years, which has helped me
+            stay motivated and continue to practice and improve my skills. It
+            has proven to be a great place for me to not only express myself,
+            but also a great place to make friends.`}</p>
+            <p>{`Now I'm in college. And although I don't plan on pursuing art professionally, I know it will be a part of me for the rest of my life.`}</p>
+            <div className="my-2 h-[2px] w-[30%] self-center rounded-full bg-slate-400 opacity-60" />
+          </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  );
 }

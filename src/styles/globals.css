@@ -9,7 +9,7 @@
 }
 
 html {
-  overflow: hidden;
+  background-color: black;
 }
 
 body {
@@ -20,13 +20,23 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-  overflow: hidden;
 }
 
 .background-global {
   background: radial-gradient(circle, #23232e 10%, transparent 11%);
   background-size: 1em 1em;
   opacity: 1;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+#__next {
+  min-height: 100%;
+  position: absolute;
+  inset: 0;
+  background-color: black;
 }
 
 .noise {
