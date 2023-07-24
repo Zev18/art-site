@@ -70,16 +70,16 @@ export default function SmallNav(props) {
         }
       `}</style>
 
-      <AnimatePresence>
+      <AnimatePresence key="navPresence">
         {title !== "nah" && (
           <motion.div
-            className={`${className} ${caffeineMono.className} fixed z-[100] flex h-full w-full`}
+            className={`${className} ${caffeineMono.className} pointer-events-none fixed z-[100] flex h-full w-full`}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}
             key="smallNav">
             <Popover className="relative bottom-0 w-full">
-              <div className="absolute inset-x-0 bottom-0 flex justify-center transition-all duration-100">
+              <div className="pointer-events-auto absolute inset-x-0 bottom-0 flex justify-center transition-all duration-100">
                 <div className="mb-4 flex max-w-max items-center justify-center gap-4 rounded-full bg-black/60 p-4 backdrop-blur">
                   <Link
                     href={"/"}
@@ -105,11 +105,15 @@ export default function SmallNav(props) {
                 <Popover.Panel>
                   {({ close }) => (
                     <motion.div
-                      className={`grid w-full grid-cols-2 grid-rows-2 gap-4 rounded-t-xl bg-black/60 p-4 backdrop-blur`}
+                      className={`pointer-events-auto grid w-full grid-cols-2 grid-rows-2 gap-4 rounded-t-xl bg-black/60 p-4 backdrop-blur`}
                       key="smallMenu"
                       ref={menuRef}>
                       {pages.map((page, index) => (
-                        <Link href={page} onClick={() => close()} key={page}>
+                        <Link
+                          href={page}
+                          onClick={() => close()}
+                          key={page}
+                          scroll={false}>
                           <div className="navButton">
                             {icons[index]}
                             <p>{capitalize(page)}</p>

@@ -17,7 +17,7 @@ export default function App({ Component, pageProps, router }) {
       />
       <SmallNav path={router.pathname} />
       <div className={`h-full w-full  ${workSans.className}`}>
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" key="mainAnimatePresence">
           <Component key={router.pathname} {...pageProps} />
         </AnimatePresence>
       </div>

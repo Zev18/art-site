@@ -123,8 +123,9 @@ export default function About() {
             </ul>
           </div>
           <div className="flex flex-col gap-4 p-6 pt-4">
-            <p className="text-xl font-bold text-white">
-              {"My name is Zev, and I'm an artist."}
+            <p
+              className={`text-xl font-bold text-white ${majorMono.className}`}>
+              {"My name is Zev, and i'm an artist."}
             </p>{" "}
             <p>{`I started getting into art in July
             2017 at the age of 16, when I was reading a comic I liked so much

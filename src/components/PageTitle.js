@@ -9,7 +9,6 @@ export default function PageTitle(props) {
   return (
     <motion.div
       className={`${className} ${caffeineMono.className} flex items-center gap-4`}
-      layoutId="pageTitle"
       key="pageTitle"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

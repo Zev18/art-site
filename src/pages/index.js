@@ -8,6 +8,7 @@ import MainBlock from "../components/MainBlock";
 import Image from "next/image";
 import ZevPortrait from "../assets/zev.webp";
 import ZevLogo from "@/components/ZevLogo";
+import { commissionStatus } from "./commissions";
 
 export default function Home() {
   return (
@@ -16,7 +17,6 @@ export default function Home() {
         <div className="relative w-0">
           <ZevLogo className="absolute left-[-8rem] top-[-3rem] z-20" />
           <div
-            layoutId="menu"
             className={`absolute ${caffeineMono.className} -left-4 -top-[125px] z-10 rounded`}>
             <MenuComponent className={`bg-gray-900 p-4`} start={4} end={10} />
           </div>
@@ -43,10 +43,26 @@ export default function Home() {
           src={ZevPortrait}
           priority
           alt="Portrait of Zev Ross"
-          fill={true}
+          fill
           sizes="100%"
           className="origin-top scale-150 object-cover"
         />
+      </motion.div>
+      <motion.div
+        className={`absolute bottom-20 right-8 flex min-w-max rounded-lg bg-slate-800 text-sm ${caffeineMono.className} overflow-hidden`}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0, transition: { delay: 0.1 } }}
+        exit={{ opacity: 0, y: 20, transition: { delay: 0.1 } }}>
+        <div className="p-2 px-3">Commissions:</div>
+        {commissionStatus === "open" ? (
+          <div className="flex grow items-center justify-center bg-cyan-400 p-2 px-3 text-black">
+            <p>OPEN</p>
+          </div>
+        ) : (
+          <div className="flex grow items-center justify-center bg-slate-900 p-2 px-3 text-cyan-400">
+            <p>CLOSED</p>
+          </div>
+        )}
       </motion.div>
       <SocialMedia className="bottom-14 left-10" />
     </motion.div>

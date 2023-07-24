@@ -10,10 +10,15 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.15",
+    "@supabase/supabase-js": "^2.26.0",
     "autoprefixer": "10.4.14",
+    "cloudinary": "^1.38.0",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
     "framer-motion": "^10.12.16",
+    "fs": "^0.0.1-security",
+    "imagemin": "^8.0.1",
+    "imagemin-jpegtran": "^7.0.0",
     "lodash": "^4.17.21",
     "next": "13.4.4",
     "next-svgr": "^0.0.2",
@@ -24,7 +29,13 @@
     "tailwindcss": "3.3.2"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0"
+  },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
   }
 }
