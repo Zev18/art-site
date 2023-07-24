@@ -11,31 +11,6 @@ import {
 import ZevPortrait from "../assets/zev.webp";
 import Image from "next/image";
 
-const container = {
-  show: {
-    transition: {
-      staggerChildren: 0.2,
-      duration: 0.1,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 0.1,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 0.6,
-    transition: {
-      duration: 0.2,
-    },
-  },
-};
-
 function yearsSinceBirthday() {
   const date = new Date("2001-07-10");
   const currentDate = new Date();

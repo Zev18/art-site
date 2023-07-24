@@ -9,7 +9,7 @@ const cdn =
   "https://cxqsrzesyspnafmuyqyp.supabase.co/storage/v1/object/public/images/public/";
 
 export default function Portfolio({ images }) {
-  let [open, setOpen] = useState("");
+  let [open, setOpen] = useState(null);
 
   return (
     <>
@@ -27,23 +27,20 @@ export default function Portfolio({ images }) {
           </motion.div>
         </div>
         <motion.div className="grid w-full grid-cols-1 gap-6 p-10">
-          {images.map(
-            ({ id, public_id, format, blurDataUrl, height, width }) => (
-              <Thumbnail
-                key={id}
-                blurDataUrl={blurDataUrl}
-                placeholder="blur"
-                height={height}
-                width={width}
-                image={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
-                setOpen={() => setOpen(`${public_id}.${format}`)}
-              />
-            )
-          )}
+          {images.map((image) => (
+            <Thumbnail
+              key={image.id}
+              blurDataUrl={image.blurDataUrl}
+              height={image.height}
+              width={image.width}
+              image={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${image.public_id}.${image.format}`}
+              setOpen={() => setOpen(image)}
+            />
+          ))}
         </motion.div>
       </div>
       <AnimatePresence className="relative z-[150]" key="carouselPresence">
-        {open !== "" && (
+        {open && (
           <>
             <motion.div
               initial={{ opacity: 0 }}
@@ -76,8 +73,10 @@ export default function Portfolio({ images }) {
                 }}
                 className="relative flex h-[90vh] w-[80vw] flex-col justify-center overflow-hidden">
                 <Image
-                  alt={open}
-                  src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${open}`}
+                  alt={open.id}
+                  placeholder="blur"
+                  blurDataURL={open.blurDataUrl}
+                  src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${open.public_id}.${open.format}`}
                   width={500}
                   height={500}
                   className="rounded-lg"
@@ -122,7 +121,7 @@ export async function getStaticProps() {
   const results = await cloudinary.search
     .expression(`folder:illustrations/*`)
     .sort_by("created_at", "desc")
-    .max_results(400)
+    .max_results(100)
     .execute();
   let i = 0;
 
