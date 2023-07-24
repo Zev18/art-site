@@ -13,7 +13,7 @@ import { capitalize } from "lodash";
 import { caffeineMono } from "@/assets/fonts/fonts";
 import { Popover, Transition } from "@headlessui/react";
 
-const pages = ["about", "portfolio", "commissions", "faq"];
+const pages = ["about", "portfolio", "commissions", "contact"];
 const icons = [
   <AlignLeft key="alignLeft" />,
   <Picture key="picture" />,
@@ -25,7 +25,7 @@ const getTitle = (path) => {
   const title = path.split("/").pop();
 
   if (pages.includes(title)) {
-    return title === "faq" ? "FAQ" : capitalize(title);
+    return capitalize(title);
   }
   return "nah";
 };

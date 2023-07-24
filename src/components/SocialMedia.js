@@ -47,6 +47,7 @@ export default function SocialMedia(props) {
                 initial="rest"
                 whileHover="hover"
                 whileTap="hover"
+                target="_blank"
                 variants={linkHover}>
                 <Instagram size={iconSize} />
                 <motion.span variants={textReveal} className="overflow-hidden">
@@ -62,6 +63,7 @@ export default function SocialMedia(props) {
                 initial="rest"
                 whileHover="hover"
                 whileTap="hover"
+                target="_blank"
                 variants={linkHover}>
                 <Twitter size={iconSize} />
                 <motion.span variants={textReveal} className="overflow-hidden">
@@ -77,6 +79,7 @@ export default function SocialMedia(props) {
                 initial="rest"
                 whileHover="hover"
                 whileTap="hover"
+                target="_blank"
                 variants={linkHover}>
                 <Image
                   alt={"Pixiv"}
@@ -97,6 +100,7 @@ export default function SocialMedia(props) {
                 initial="rest"
                 whileHover="hover"
                 whileTap="hover"
+                target="_blank"
                 variants={linkHover}>
                 <Image
                   alt={"Ko-Fi"}
@@ -120,6 +124,7 @@ export default function SocialMedia(props) {
                 initial="rest"
                 whileHover="hover"
                 whileTap="hover"
+                target="_blank"
                 variants={linkHover}>
                 <Mail size={iconSize} />
                 <motion.span variants={textReveal} className="overflow-hidden">

@@ -163,13 +163,13 @@ export default function MenuComponent(props) {
                 variants={item}
                 className="overflow-hidden"
                 style={{ originX: "left" }}>
-                <Link href={"/faq"}>
+                <Link href={"/contact"}>
                   <motion.div
                     className="flex"
                     animate={{ opacity: 0.75, gap: ".5rem" }}
                     whileHover={selectedState}
                     whileTap={selectedState}>
-                    FAQ
+                    Contact
                     <ArrowRight className="max-h-min" size={20} />
                   </motion.div>
                 </Link>

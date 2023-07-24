@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Check, X } from "react-feather";
 import { caffeineMono, majorMono } from "@/assets/fonts/fonts";
 
-export const commissionStatus = "open";
+export const commissionStatus = "closed";
 
 export default function Commissions() {
   return (
@@ -53,7 +53,7 @@ export default function Commissions() {
       </motion.div>
       {commissionStatus === "open" && (
         <motion.div
-          className={`w-full rounded-lg bg-slate-800 ${caffeineMono.className} overflow-hidden border-4 border-cyan-400 p-4`}
+          className={`w-full rounded-lg  ${caffeineMono.className} overflow-hidden border-4 border-cyan-400 p-4`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}>
@@ -68,12 +68,14 @@ export default function Commissions() {
         </motion.div>
       )}
       <motion.div
-        className="mb-[3rem] flex w-full flex-col gap-4 rounded-lg border-4 border-slate-700 bg-slate-800 p-4"
+        className="mb-[4rem] flex w-full flex-col gap-4 rounded-lg border-4 border-slate-700 bg-slate-800 p-4 text-slate-400"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
         exit={{ opacity: 0, y: 20 }}>
-        <h1 className={`text-2xl font-bold ${majorMono.className}`}>terms</h1>
-        <p className="text-slate-400">
+        <h1 className={`text-2xl font-bold ${majorMono.className} text-white`}>
+          terms
+        </h1>
+        <p>
           {
             "I will usually post in advance on my Instagram story or on Twitter if I plan to open commissions. If you don't think you can afford one, dm me on Instagram and we can negotiate prices."
           }
@@ -90,7 +92,10 @@ export default function Commissions() {
             <p>Furries, humans with animal traits, NSFW</p>
           </div>
         </div>
-        <p>{""}</p>
+        <p>
+          The amount of time commissions take depends on my schedule and on the
+          commission! So thank you for being patient with me.
+        </p>
       </motion.div>
     </div>
   );

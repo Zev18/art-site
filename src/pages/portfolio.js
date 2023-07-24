@@ -77,8 +77,8 @@ export default function Portfolio({ images }) {
                   placeholder="blur"
                   blurDataURL={open.blurDataUrl}
                   src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${open.public_id}.${open.format}`}
-                  width={500}
-                  height={500}
+                  width={open.width}
+                  height={open.height}
                   className="rounded-lg"
                 />
               </motion.div>
