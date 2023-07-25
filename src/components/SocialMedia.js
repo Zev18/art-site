@@ -3,13 +3,15 @@ import { Instagram, Twitter, Mail } from "react-feather";
 import pixiv from "../../public/Pixiv_Icon.svg";
 import kofi from "../../public/ko-fi.svg";
 import Image from "next/image";
-import localFont from "next/font/local";
 import { motion } from "framer-motion";
+import useWindowDimensions from "@/hooks/useWindowDimensions";
 import { caffeineMono } from "@/assets/fonts/fonts";
 
 export default function SocialMedia(props) {
-  const { className, initial, animate, exit, onAnimationComplete } = props;
-  const iconSize = 20;
+  const { className, onAnimationComplete } = props;
+  const { height } = useWindowDimensions();
+  const tallScreen = height > 750;
+  const iconSize = tallScreen ? 25 : 20;
 
   const linkHover = {
     rest: { opacity: 0.6, x: 0 },
@@ -38,7 +40,8 @@ export default function SocialMedia(props) {
         className={`absolute ${className} ${caffeineMono.className}`}
         onAnimationComplete={onAnimationComplete}>
         <div className="flex w-0 gap-1 border-l-2 border-cyan-400">
-          <ul className="ml-4 flex flex-col gap-4">
+          <ul
+            className={`ml-4 flex flex-col  ${tallScreen ? "gap-6" : "gap-4"}`}>
             <li>
               <motion.a
                 href={"https://www.instagram.com/zevcandraw/"}
