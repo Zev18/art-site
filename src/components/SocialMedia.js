@@ -1,7 +1,7 @@
 import React from "react";
 import { Instagram, Twitter, Mail } from "react-feather";
-import pixiv from "../../public/Pixiv_Icon.svg";
-import kofi from "../../public/ko-fi.svg";
+import pixiv from "../assets/Pixiv_Icon.svg";
+import kofi from "../assets/ko-fi.svg";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import useWindowDimensions from "@/hooks/useWindowDimensions";

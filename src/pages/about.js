@@ -8,7 +8,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import ZevPortrait from "../assets/zev.webp";
+import ZevPortrait from "../../public/zev.webp";
 import Image from "next/image";
 
 function yearsSinceBirthday() {

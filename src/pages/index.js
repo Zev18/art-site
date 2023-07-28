@@ -6,7 +6,7 @@ import MenuComponent from "../components/MenuComponent";
 import SocialMedia from "../components/SocialMedia";
 import MainBlock from "../components/MainBlock";
 import Image from "next/image";
-import ZevPortrait from "../assets/zev.webp";
+import ZevPortrait from "../../public/zev.webp";
 import ZevLogo from "@/components/ZevLogo";
 import { commissionStatus } from "./commissions";
 import useWindowDimensions from "@/hooks/useWindowDimensions";

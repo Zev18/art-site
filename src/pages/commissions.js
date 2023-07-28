@@ -81,7 +81,7 @@ export default function Commissions() {
           }
         </p>
         <div
-          className={`flex flex-col gap-4 rounded-lg bg-slate-950 p-4 text-slate-400 ${caffeineMono.className}`}>
+          className={`flex max-w-max flex-col gap-4 rounded-lg bg-slate-950 p-4 text-slate-400 ${caffeineMono.className}`}>
           <p className="text-white">What I will draw:</p>
           <div className="flex items-center justify-between gap-4">
             <Check size={36} className="text-cyan-400" />
