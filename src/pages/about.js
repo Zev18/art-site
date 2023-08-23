@@ -32,10 +32,6 @@ function yearsSinceBirthday() {
 export default function About() {
   const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    console.log("Page scroll: ", latest);
-  });
-
   return (
     <motion.div className="relative flex max-h-min w-full flex-col items-center justify-center overflow-hidden duration-200 xl:flex-row xl:py-20">
       <motion.div
