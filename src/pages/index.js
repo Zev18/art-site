@@ -2,7 +2,6 @@
 
 import { caffeineMono, majorMono } from "@/assets/fonts/fonts";
 import { motion } from "framer-motion";
-import { AlignLeft, Picture, DollarSign, HelpCircle } from "react-feather";
 import MenuComponent from "../components/MenuComponent";
 import SocialMedia from "../components/SocialMedia";
 import Image from "next/image";
@@ -10,14 +9,6 @@ import ZevPortrait from "../../public/zev.webp";
 import ZevLogo from "@/components/ZevLogo";
 import { commissionStatus } from "./commissions";
 import useWindowDimensions from "@/hooks/useWindowDimensions";
-
-const pages = ["about", "portfolio", "commissions", "contact"];
-const icons = [
-  <AlignLeft key="alignLeft" />,
-  <Picture key="picture" />,
-  <DollarSign key="dollarSign" />,
-  <HelpCircle key="helpCircle" />,
-];
 
 export default function Home() {
   const { height } = useWindowDimensions();

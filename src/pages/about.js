@@ -6,10 +6,11 @@ import {
   easeOut,
   motion,
   useScroll,
-  useTransform,
+  useMotionValueEvent,
 } from "framer-motion";
 import ZevPortrait from "../../public/zev.webp";
 import Image from "next/image";
+import { useEffect } from "react";
 
 function yearsSinceBirthday() {
   const date = new Date("2001-07-10");
@@ -28,23 +29,33 @@ function yearsSinceBirthday() {
   return yearsPassed;
 }
 
-const useParallax = (value) => {
-  const retVal = useTransform(value, [0, 1], ["0%", "95%"]);
-  if (window.innerWidth > 1024) {
-    return null;
-  }
-  return retVal;
-};
-
 export default function About() {
-  const { scrollYProgress } = useScroll();
-  const y = useParallax(scrollYProgress);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    console.log("Page scroll: ", latest);
+  });
 
   return (
     <motion.div className="relative flex max-h-min w-full flex-col items-center justify-center overflow-hidden duration-200 xl:flex-row xl:py-20">
       <motion.div
-        style={{ y }}
-        className="z-0 m-8 sm:max-w-xl"
+        style={{ translateY: scrollY }}
+        className="z-0 m-8 sm:max-w-xl xl:hidden"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.8 }}
+        transition={{ ease: easeInOut, duration: 0.2 }}>
+        <Image
+          priority
+          src={ZevPortrait}
+          placeholder="blur"
+          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAAQABAAD/4QBWRXhpZgAATU0AKgAAAAgABAEaAAUAAAABAAAAPgEbAAUAAAABAAAARgEoAAMAAAABAAIAAAITAAMAAAABAAEAAAAAAAAAAAABAAAAAQAAAAEAAAAB/9sAQwAFAwQEBAMFBAQEBQUFBgcMCAcHBwcPCwsJDBEPEhIRDxERExYcFxMUGhURERghGBodHR8fHxMXIiQiHiQcHh8e/9sAQwEFBQUHBgcOCAgOHhQRFB4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4e/8AAEQgADwAUAwEiAAIRAQMRAf/EABkAAAIDAQAAAAAAAAAAAAAAAAAGAgMHCP/EACUQAAICAQMDBAMAAAAAAAAAAAECAwQRAAUGITFRBxITFTJBcf/EABYBAQEBAAAAAAAAAAAAAAAAAAUDBv/EAB0RAQACAQUBAAAAAAAAAAAAAAECAwAEBRETIUH/2gAMAwEAAhEDEQA/AJbxHPV4rbfbrEFfcHiK1Wlx1c/oA92xnA840rele83jc3GtyHe45afsiFVrkyh/lYtlQxxk4Gcaqebl9jkBsQ7TWtrEcbes1kCKDzJ7QQS5Hnt41kXJbm5ryq798Ee2lhjMMKVRy3cAdMdh/NbncNZZXcWogee8g4dVUSixc6Uv7ZEbLEKNGkfbPU+jJSj+0imS0qhXMKAq2B+XUjGfGjS8N00zEewyHXM+Z//Z"
+          alt="Portrait of Zev Ross"
+          className="rounded-xl object-cover xl:hidden"
+        />
+      </motion.div>
+      <motion.div
+        className="z-0 m-8 hidden sm:max-w-xl xl:block"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.8 }}
