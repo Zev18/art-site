@@ -14,8 +14,8 @@ export default function ZevLogo({ className }) {
         transition: { duration: 0.5, delay: 0.1 },
       }}
       exit={{ opacity: 0, x: 0, y: -30 }}
-      className={`absolute ${majorMono.className} ${className} z-10 overflow-hidden text-3xl`}>
-      <Link href="/" key="zevLink">
+      className={`absolute ${majorMono.className} ${className} z-20 overflow-hidden text-3xl sm:text-4xl`}>
+      <Link href="/" key="zevLink" className="drop-shadow-lg">
         ZEV ROSS
       </Link>
     </motion.span>

@@ -105,7 +105,7 @@ export default function Contact() {
         </p>
       </motion.div>
       <motion.div
-        className="grid grid-cols-2 gap-10 pb-[5rem] text-slate-400 hover:text-white"
+        className="grid grid-cols-2 gap-10 pb-[5rem] text-slate-400"
         variants={container}
         initial="hidden"
         animate="show"
@@ -116,7 +116,7 @@ export default function Contact() {
             key={social.name}
             href={social.url}
             target="_blank"
-            className={`self-center justify-self-center ${caffeineMono.className}`}>
+            className={`self-center justify-self-center ${caffeineMono.className} duration-100 hover:text-white`}>
             <div className="flex flex-col items-center justify-center gap-4">
               <div className="relative">
                 <Image

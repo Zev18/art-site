@@ -29,7 +29,11 @@ function yearsSinceBirthday() {
 }
 
 const useParallax = (value) => {
-  return useTransform(value, [0, 1], ["0%", "95%"]);
+  const retVal = useTransform(value, [0, 1], ["0%", "95%"]);
+  if (window.innerWidth > 1024) {
+    return null;
+  }
+  return retVal;
 };
 
 export default function About() {
@@ -37,10 +41,10 @@ export default function About() {
   const y = useParallax(scrollYProgress);
 
   return (
-    <motion.div className="relative overflow-x-hidden duration-200">
+    <motion.div className="relative flex max-h-min w-full flex-col items-center justify-center overflow-hidden duration-200 xl:flex-row xl:py-20">
       <motion.div
         style={{ y }}
-        className="z-0 m-8"
+        className="z-0 m-8 sm:max-w-xl"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.8 }}
@@ -56,7 +60,7 @@ export default function About() {
       </motion.div>
 
       <motion.div
-        className="relative z-20 flex h-full w-full flex-col items-center"
+        className="relative z-20 flex w-full max-w-prose flex-col items-center"
         initial={{ y: 100, scale: 0.8, opacity: 0 }}
         animate={{
           y: 0,
@@ -70,7 +74,7 @@ export default function About() {
           opacity: 0,
           transition: { ease: easeOut, duration: 0.2 },
         }}>
-        <motion.div className="mx-8 mb-32 min-h-max overflow-x-visible rounded-xl bg-slate-800/80 text-slate-400 backdrop-blur">
+        <motion.div className="mx-8 mb-32 min-h-max overflow-x-visible rounded-xl bg-slate-800/80 text-slate-400 backdrop-blur xl:mb-0">
           <div className="flex items-center justify-between gap-3 px-6 py-4">
             <h1 className={`${majorMono.className} text-2xl text-white`}>
               ZEV ROSS

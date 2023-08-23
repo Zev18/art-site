@@ -41,7 +41,6 @@ export default function SmallNav(props) {
   useEffect(() => {
     let handler = (e) => {
       if (menuRef.current && menuRef.current.contains(e.target)) {
-        console.log("test");
         setOpen(false);
       }
     };
@@ -70,10 +69,10 @@ export default function SmallNav(props) {
         }
       `}</style>
 
-      <AnimatePresence key="navPresence">
+      <AnimatePresence key="navPresence sm:hidden">
         {title !== "nah" && (
           <motion.div
-            className={`${className} ${caffeineMono.className} pointer-events-none fixed z-[100] flex h-full w-full`}
+            className={`${className} ${caffeineMono.className} pointer-events-none fixed z-[100] flex h-full w-full sm:hidden`}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}

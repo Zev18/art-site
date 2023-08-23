@@ -9,7 +9,7 @@
 }
 
 html {
-  background-color: black;
+  background-color: rgb(15, 14, 17);
 }
 
 body {
@@ -30,6 +30,12 @@ body {
 
 * {
   -webkit-tap-highlight-color: transparent;
+}
+
+@media screen and (min-width: 640px) {
+  html {
+    scrollbar-gutter: stable;
+  }
 }
 
 #__next {
@@ -87,4 +93,30 @@ body {
   90% {
     transform: translate(-10%, 10%);
   }
+}
+
+.link {
+  position: relative;
+  padding: 4px 8px;
+  transition: all 0.3s;
+}
+
+.link:hover {
+  translate: 0 -3px;
+}
+
+.link::before {
+  content: "";
+  position: absolute;
+  mix-blend-mode: difference;
+  width: 0%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: #fff;
+  transition: all 0.3s;
+}
+
+.link:hover::before {
+  width: 100%;
 }
