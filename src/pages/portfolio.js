@@ -11,81 +11,120 @@ const cdn =
 export default function Portfolio({ images }) {
   let [open, setOpen] = useState(null);
 
+  console.log(images[0]);
+
   return (
     <>
-      <div className="relative flex h-full w-full flex-col text-white">
-        <div className="flex w-full justify-center p-8 pb-0">
+      <div className="lg:hidden">
+        <div className="relative flex h-full w-full flex-col text-white">
+          <div className="flex w-full justify-center p-8 pb-0">
+            <motion.div
+              initial={{ opacity: 0, y: -30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30, transition: { delay: 0.1 } }}
+              className="w-full rounded-lg border-4 border-slate-700 bg-slate-800 p-4">
+              <h1 className={`text-2xl font-bold ${majorMono.className}`}>
+                portfolio
+              </h1>
+              <p className="text-slate-400">My works</p>
+            </motion.div>
+          </div>
+          <motion.div className="grid w-full grid-cols-1 items-center gap-6 p-10 sm:grid-cols-2">
+            {images.map((image) => (
+              <Thumbnail
+                key={image.id}
+                blurDataUrl={image.blurDataUrl}
+                height={image.height}
+                width={image.width}
+                image={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${image.public_id}.${image.format}`}
+                setOpen={() => setOpen(image)}
+              />
+            ))}
+          </motion.div>
+        </div>
+        <AnimatePresence className="relative z-[150]" key="carouselPresence">
+          {open && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                  transition: { ease: easeIn, duration: 0.1 },
+                }}
+                exit={{
+                  opacity: 0,
+                  transition: { ease: easeOut, duration: 0.1 },
+                }}
+                key="carousel"
+                className="fixed inset-0 bg-black/30 backdrop-blur"
+              />
+
+              <div
+                className="fixed inset-0 flex items-center justify-center"
+                onClick={() => setOpen("")}>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    transition: { ease: easeIn },
+                  }}
+                  exit={{
+                    opacity: 0,
+                    y: 20,
+                    transition: { ease: easeOut },
+                  }}
+                  className="flex h-[90vh] w-[80vw] flex-col items-center justify-center overflow-hidden">
+                  <Image
+                    alt={open.id}
+                    placeholder="blur"
+                    blurDataURL={open.blurDataUrl}
+                    src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${open.public_id}.${open.format}`}
+                    width={open.width}
+                    height={open.height}
+                    className="max-h-[90vh] max-w-min rounded-lg object-contain"
+                  />
+                </motion.div>
+              </div>
+            </>
+          )}
+        </AnimatePresence>
+      </div>
+      <div className="hidden h-full lg:block">
+        <div className="relative flex h-full w-full flex-col px-10 text-white">
           <motion.div
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30, transition: { delay: 0.1 } }}
-            className="w-full rounded-lg border-4 border-slate-700 bg-slate-800 p-4">
+            className="fixed z-20 max-w-max rounded-lg border-4 border-slate-700 bg-slate-800 p-4 px-8 shadow-lg">
             <h1 className={`text-2xl font-bold ${majorMono.className}`}>
               portfolio
             </h1>
             <p className="text-slate-400">My works</p>
           </motion.div>
-        </div>
-        <motion.div className="grid w-full grid-cols-1 gap-6 p-10">
-          {images.map((image) => (
-            <Thumbnail
-              key={image.id}
-              blurDataUrl={image.blurDataUrl}
-              height={image.height}
-              width={image.width}
-              image={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${image.public_id}.${image.format}`}
-              setOpen={() => setOpen(image)}
-            />
-          ))}
-        </motion.div>
-      </div>
-      <AnimatePresence className="relative z-[150]" key="carouselPresence">
-        {open && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: 1,
-                transition: { ease: easeIn, duration: 0.1 },
-              }}
-              exit={{
-                opacity: 0,
-                transition: { ease: easeOut, duration: 0.1 },
-              }}
-              key="carousel"
-              className="fixed inset-0 bg-black/30 backdrop-blur"
-            />
-
-            <div
-              className="fixed inset-0 flex items-center justify-center"
-              onClick={() => setOpen("")}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                  transition: { ease: easeIn },
-                }}
-                exit={{
-                  opacity: 0,
-                  y: 20,
-                  transition: { ease: easeOut },
-                }}
-                className="relative flex h-[90vh] w-[80vw] flex-col justify-center overflow-hidden">
+          <div className="absolute left-[5rem] top-[45%] grid max-w-[15rem] grid-cols-1 gap-10 overflow-hidden pb-[50%]">
+            {images.map((image) => (
+              <div key={image.id}>
                 <Image
-                  alt={open.id}
-                  placeholder="blur"
-                  blurDataURL={open.blurDataUrl}
-                  src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${open.public_id}.${open.format}`}
-                  width={open.width}
-                  height={open.height}
-                  className="rounded-lg"
+                  className="rounded-lg object-cover"
+                  alt=""
+                  src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${image.public_id}.${image.format}`}
+                  style={{ transform: "translate3d(0, 0, 0)" }}
+                  blurDataUrl={image.blurDataUrl}
+                  height={image.height}
+                  width={image.width}
+                  image={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${image.public_id}.${image.format}`}
                 />
-              </motion.div>
+              </div>
+            ))}
+          </div>
+          <div className="fixed right-0 flex items-center justify-center">
+            <div>
+              <Image alt="" />
             </div>
-          </>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
@@ -99,7 +138,7 @@ function Thumbnail({ image, setOpen, blurDataUrl, height, width }) {
       whileInView={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
       viewport={{ once: true }}
-      className="relative h-full max-w-max overflow-hidden rounded-lg bg-slate-600"
+      className="relative max-w-max overflow-hidden rounded-lg bg-slate-600"
       onClick={setOpen}>
       <Image
         alt=""
@@ -109,7 +148,7 @@ function Thumbnail({ image, setOpen, blurDataUrl, height, width }) {
         blurDataURL={blurDataUrl}
         width={width}
         height={height}
-        className={` duration-200 ease-in-out group-hover:opacity-75
+        className={` object-cover duration-200 ease-in-out group-hover:opacity-75
           ${loading ? "scale-110 blur" : "scale-100 blur-0"}`}
         onLoadingComplete={() => setLoading(false)}
       />
