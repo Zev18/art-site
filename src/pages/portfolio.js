@@ -54,7 +54,7 @@ export default function Portfolio({ images }) {
             initial={{ opacity: 0, y: -30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -30, transition: { delay: 0.1 } }}
-            className="w-full rounded-lg border-4 border-slate-700 bg-slate-800 p-4 md:max-w-max md:px-10 xl:mx-[5%]">
+            className="w-full rounded-lg border-4 border-slate-700 bg-slate-800 p-4 md:max-w-max md:px-10 xl:mx-[5%] xl:ml-[10%]">
             <h1 className={`text-2xl font-bold ${majorMono.className}`}>
               portfolio
             </h1>
@@ -75,10 +75,14 @@ export default function Portfolio({ images }) {
         </motion.div>
 
         <div className="my-6 flex w-full items-center justify-center">
-          <motion.div className={`${caffeineMono.className}`}>
+          <motion.div
+            className={`${caffeineMono.className}`}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0, transition: { delay: 0.5 } }}>
             <Link
               href="#"
-              className="group flex items-center justify-center gap-4">
+              className="group flex items-center justify-center gap-4"
+              scroll={false}>
               Back to top{" "}
               <ArrowUp className="transition-all duration-200 group-hover:translate-y-[-0.25rem]" />
             </Link>
