@@ -76,34 +76,35 @@ const item = {
 
 export default function Contact() {
   return (
-    <div className="relative z-0 flex w-full flex-col items-center gap-4 p-8 text-white">
-      <motion.div
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -30, transition: { delay: 0.1 } }}
-        className="w-full rounded-lg border-4 border-slate-700 bg-slate-800">
-        <div className="flex flex-col p-4">
-          <h1 className={`text-2xl font-bold ${majorMono.className}`}>
-            contact
-          </h1>
-          <p className="text-slate-400">Reach out</p>
-        </div>
-      </motion.div>
-
-      <motion.div
-        className="mb-10 flex w-full flex-col gap-4 rounded-lg border-4 border-slate-700 bg-gray-950 p-4 text-slate-400"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
-        exit={{ opacity: 0, y: 20 }}>
-        <p>
-          For business inquiries, email{" "}
-          <a
-            className="cursor-pointer text-cyan-400"
-            href="mailto:zevross@gmail.com">
-            zevross@gmail.com
-          </a>
-        </p>
-      </motion.div>
+    <div className="relative z-0 flex w-full flex-col items-center gap-4 p-8 text-white md:flex-row md:items-start md:justify-center md:gap-16">
+      <div className="flex shrink flex-col gap-4 md:max-w-sm">
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -30, transition: { delay: 0.1 } }}
+          className="rounded-lg border-4 border-slate-700 bg-slate-800">
+          <div className="flex flex-col p-4">
+            <h1 className={`text-2xl font-bold ${majorMono.className}`}>
+              contact
+            </h1>
+            <p className="text-slate-400">Reach out</p>
+          </div>
+        </motion.div>
+        <motion.div
+          className="mb-10 flex flex-col gap-4 rounded-lg border-4 border-slate-700 bg-gray-950 p-4 text-slate-400"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
+          exit={{ opacity: 0, y: 20 }}>
+          <p>
+            For business inquiries, email{" "}
+            <a
+              className="cursor-pointer text-cyan-400"
+              href="mailto:zevross@gmail.com">
+              zevross@gmail.com
+            </a>
+          </p>
+        </motion.div>
+      </div>
       <motion.div
         className="grid grid-cols-2 gap-10 pb-[5rem] text-slate-400"
         variants={container}

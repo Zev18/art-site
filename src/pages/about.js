@@ -1,16 +1,9 @@
 "use client";
 
 import { caffeineMono, majorMono } from "@/assets/fonts/fonts";
-import {
-  easeInOut,
-  easeOut,
-  motion,
-  useScroll,
-  useMotionValueEvent,
-} from "framer-motion";
-import ZevPortrait from "../../public/zev.webp";
+import { easeInOut, easeOut, motion, useScroll } from "framer-motion";
 import Image from "next/image";
-import { useEffect } from "react";
+import ZevPortrait from "../../public/zev.webp";
 
 function yearsSinceBirthday() {
   const date = new Date("2001-07-10");
