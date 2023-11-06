@@ -10,6 +10,12 @@ export default function Metadata({ pageName, description }) {
       <meta name="application-name" content="Zev's Art" />
       <meta name="keywords" content="art, illustration, commissions, zev" />
       <meta name="color-scheme" content="dark light" />
+
+      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico" />
+
       <meta
         name="description"
         content={
