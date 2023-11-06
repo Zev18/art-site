@@ -1,11 +1,11 @@
-import { useCallback, useEffect } from "react";
 import { caffeineMono, majorMono } from "@/assets/fonts/fonts";
+import Metadata from "@/components/Metadata";
 import getBase64ImageUrl from "@/utils/generateBlurPlaceholder";
 import { AnimatePresence, easeIn, easeOut, motion } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
-import { ArrowUp, ChevronLeft, ChevronRight } from "react-feather";
 import Link from "next/link";
+import { useCallback, useEffect, useState } from "react";
+import { ArrowUp, ChevronLeft, ChevronRight } from "react-feather";
 import cloudinary from "../../cloudinary";
 
 const cdn =
@@ -48,6 +48,7 @@ export default function Portfolio({ images }) {
 
   return (
     <>
+      <Metadata pageName="Portfolio" />
       <div className="relative mb-[10rem] flex h-full w-full flex-col text-white">
         <div className="flex w-full p-8 pb-0">
           <motion.div
