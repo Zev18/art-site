@@ -81,8 +81,7 @@ export default function Portfolio({ images }) {
             whileInView={{ opacity: 1, y: 0, transition: { delay: 0.5 } }}>
             <Link
               href="#"
-              className="group flex items-center justify-center gap-4"
-              scroll={false}>
+              className="group flex items-center justify-center gap-4">
               Back to top{" "}
               <ArrowUp className="transition-all duration-200 group-hover:translate-y-[-0.25rem]" />
             </Link>
