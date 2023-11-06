@@ -22,7 +22,10 @@ export default function Metadata({ pageName, description }) {
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico" />
 
       <meta property="og:title" content={title} />
-      <meta property="og:image" content="/twittercard.jpg" />
+      <meta
+        property="og:image"
+        content="https://www.zevsart.com/twittercard.jpg"
+      />
       <meta property="og:description" content={desc} />
       <meta property="og:url" content="https://www.zevsart.com/" />
 
@@ -31,7 +34,10 @@ export default function Metadata({ pageName, description }) {
       <meta name="twitter:creator" content="zevcandraw" />
       <meta name="twitter:description" content={desc} />
       <meta name="twitter:title" content={title} />
-      <meta name="twitter:image" content="/twittercard.jpg" />
+      <meta
+        name="twitter:image"
+        content="https://www.zevsart.com/twittercard.jpg"
+      />
       <meta name="twitter:image:alt" content="Zev's Art" />
 
       <meta name="description" content={desc} />
