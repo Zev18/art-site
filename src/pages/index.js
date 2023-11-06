@@ -53,7 +53,7 @@ export default function Home() {
                   className="origin-top translate-x-2 scale-125 object-cover"
                 />
               </motion.div>
-              <ZevLogo className="absolute left-[-4rem] top-[-3rem] z-20 xl:left-[10rem] xl:top-0 xl:text-5xl" />
+              <ZevLogo className="absolute left-[-8rem] top-[-3rem] z-20 xl:left-[10rem] xl:top-0 xl:text-5xl" />
               <div
                 className={`absolute ${caffeineMono.className} -left-4 -top-[125px] z-10 rounded`}>
                 <MenuComponent className="bg-gray-900 p-4" start={4} end={10} />
