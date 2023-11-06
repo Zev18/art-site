@@ -1,10 +1,11 @@
 import { useCallback, useEffect } from "react";
-import { majorMono } from "@/assets/fonts/fonts";
+import { caffeineMono, majorMono } from "@/assets/fonts/fonts";
 import getBase64ImageUrl from "@/utils/generateBlurPlaceholder";
 import { AnimatePresence, easeIn, easeOut, motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "react-feather";
+import { ArrowUp, ChevronLeft, ChevronRight } from "react-feather";
+import Link from "next/link";
 import cloudinary from "../../cloudinary";
 
 const cdn =
@@ -47,7 +48,7 @@ export default function Portfolio({ images }) {
 
   return (
     <>
-      <div className="relative flex h-full w-full flex-col text-white">
+      <div className="relative mb-[10rem] flex h-full w-full flex-col text-white">
         <div className="flex w-full p-8 pb-0">
           <motion.div
             initial={{ opacity: 0, y: -30 }}
@@ -60,7 +61,7 @@ export default function Portfolio({ images }) {
             <p className="text-slate-400">My works</p>
           </motion.div>
         </div>
-        <motion.div className="mb-[10rem] grid w-full grid-cols-1 items-center gap-6 self-center p-10 sm:grid-cols-2 md:grid-cols-3 lg:max-w-[80%] xl:grid-cols-4">
+        <motion.div className="grid w-full grid-cols-1 items-center gap-6 self-center p-10 sm:grid-cols-2 md:grid-cols-3 lg:max-w-[80%] xl:grid-cols-4">
           {images.map((image, index) => (
             <Thumbnail
               key={image.id}
@@ -72,7 +73,19 @@ export default function Portfolio({ images }) {
             />
           ))}
         </motion.div>
+
+        <div className="my-6 flex w-full items-center justify-center">
+          <motion.div className={`${caffeineMono.className}`}>
+            <Link
+              href="#"
+              className="group flex items-center justify-center gap-4">
+              Back to top{" "}
+              <ArrowUp className="transition-all duration-200 group-hover:translate-y-[-0.25rem]" />
+            </Link>
+          </motion.div>
+        </div>
       </div>
+
       <AnimatePresence className="relative z-[150]" key="carouselPresence">
         {open && (
           <>
@@ -95,7 +108,7 @@ export default function Portfolio({ images }) {
               onClick={() => setOpen("")}>
               {selectedImage > 0 && (
                 <motion.div
-                  className="z-10 grow cursor-pointer p-4"
+                  className="z-10 grow cursor-pointer pl-2 md:p-4"
                   onClick={(e) => {
                     e.stopPropagation();
                     setOpenImage(images[selectedImage - 1], selectedImage - 1);
@@ -126,7 +139,7 @@ export default function Portfolio({ images }) {
                   y: 20,
                   transition: { ease: easeOut },
                 }}
-                className="relative m-[5vmin] flex max-h-[90%] max-w-full select-none justify-center"
+                className="relative m-2 flex max-h-[90%] max-w-full select-none justify-center md:m-[5vmin]"
                 style={{ aspectRatio: `${open.width}/${open.height}` }}>
                 <Image
                   alt={open.id}
@@ -141,7 +154,7 @@ export default function Portfolio({ images }) {
               </motion.div>
               {selectedImage < images.length - 1 && (
                 <motion.div
-                  className="z-10 flex grow cursor-pointer justify-end p-4"
+                  className="z-10 flex grow cursor-pointer justify-end pr-2 md:p-4"
                   onClick={(e) => {
                     e.stopPropagation();
                     setOpenImage(images[selectedImage + 1], selectedImage + 1);
