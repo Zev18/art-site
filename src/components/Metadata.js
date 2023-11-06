@@ -10,7 +10,7 @@ export default function Metadata({ pageName, description }) {
   return (
     <Head>
       <title>{title}</title>
-      <meta charset="utf-8" />
+      <meta content="text/html; charset=UTF-8" name="Content-Type" />
       <meta name="author" content="Zev Ross" />
       <meta name="application-name" content="Zev's Art" />
       <meta name="keywords" content="art, illustration, commissions, zev" />
