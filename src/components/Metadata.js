@@ -16,6 +16,8 @@ export default function Metadata({ pageName, description }) {
       <meta name="keywords" content="art, illustration, commissions, zev" />
       <meta name="color-scheme" content="dark light" />
 
+      <meta name="theme-color" content="#111012" />
+
       <link rel="shortcut icon" href="/favicon.ico" />
       <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
