@@ -8,9 +8,6 @@ import { useCallback, useEffect, useState } from "react";
 import { ArrowUp, ChevronLeft, ChevronRight } from "react-feather";
 import cloudinary from "../../cloudinary";
 
-const cdn =
-  "https://cxqsrzesyspnafmuyqyp.supabase.co/storage/v1/object/public/images/public/";
-
 export default function Portfolio({ images }) {
   let [open, setOpen] = useState(null);
   let [selectedImage, setSelectedImage] = useState(0);
@@ -246,5 +243,6 @@ export async function getStaticProps() {
     props: {
       images: reducedResults,
     },
+    revalidate: 60,
   };
 }
