@@ -4,9 +4,16 @@ import getBase64ImageUrl from "@/utils/generateBlurPlaceholder";
 import { AnimatePresence, easeIn, easeOut, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowUp, ChevronLeft, ChevronRight } from "react-feather";
+import { A11y, Keyboard, Zoom } from "swiper/modules";
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import cloudinary from "../../cloudinary";
+
+import "swiper/css";
+import "swiper/css/a11y";
+import "swiper/css/keyboard";
+import "swiper/css/zoom";
 
 export default function Portfolio({ images }) {
   let [open, setOpen] = useState(null);
@@ -18,19 +25,11 @@ export default function Portfolio({ images }) {
 
   const handleKeyPress = useCallback(
     (event) => {
-      if (event.key == "ArrowLeft" && open && selectedImage > 0) {
-        setOpenImage(images[selectedImage - 1], selectedImage - 1);
-      } else if (
-        event.key == "ArrowRight" &&
-        open &&
-        selectedImage < images.length - 1
-      ) {
-        setOpenImage(images[selectedImage + 1], selectedImage + 1);
-      } else if (event.key == "Escape" && open) {
+      if (event.key == "Escape" && open) {
         setOpen("");
       }
     },
-    [images, open, selectedImage]
+    [open]
   );
 
   useEffect(() => {
@@ -42,6 +41,26 @@ export default function Portfolio({ images }) {
       document.removeEventListener("keydown", handleKeyPress);
     };
   }, [handleKeyPress]);
+
+  useEffect(() => {
+    console.log(images);
+  }, [images]);
+
+  // swiper functions
+  const sliderRef = useRef(null);
+  const [currIndex, setCurrIndex] = useState(0);
+
+  const handlePrev = useCallback((e) => {
+    e.stopPropagation();
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slidePrev();
+  }, []);
+
+  const handleNext = useCallback((e) => {
+    e.stopPropagation();
+    if (!sliderRef.current) return;
+    sliderRef.current.swiper.slideNext();
+  }, []);
 
   return (
     <>
@@ -104,77 +123,78 @@ export default function Portfolio({ images }) {
               className="fixed inset-0 bg-black/30 backdrop-blur"
             />
 
-            <div
-              className="fixed inset-0 z-0 flex w-full items-center justify-between"
-              onClick={() => setOpen("")}>
-              {selectedImage > 0 && (
-                <motion.div
-                  className="z-10 grow cursor-pointer pl-2 md:p-4"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setOpenImage(images[selectedImage - 1], selectedImage - 1);
-                  }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                    transition: { ease: easeIn, delay: 0.2, duration: 0.05 },
-                  }}
-                  exit={{
-                    opacity: 0,
-                    y: 20,
-                    transition: { ease: easeOut, delay: 0.05 },
-                  }}>
-                  <ChevronLeft />
-                </motion.div>
-              )}
+            {
               <motion.div
+                className="fixed inset-0 z-0 flex h-full w-full flex-col pb-[20%] sm:items-center sm:justify-center sm:pb-0"
+                onClick={() => setOpen("")}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{
                   opacity: 1,
                   y: 0,
-                  transition: { ease: easeIn },
+                  transition: { delay: 0.1, duration: 0.3 },
                 }}
-                exit={{
-                  opacity: 0,
-                  y: 20,
-                  transition: { ease: easeOut },
-                }}
-                className="relative m-2 flex max-h-[90%] max-w-full select-none justify-center md:m-[5vmin]"
-                style={{ aspectRatio: `${open.width}/${open.height}` }}>
-                <Image
-                  alt={open.id}
-                  placeholder="blur"
-                  quality={100}
-                  blurDataURL={open.blurDataUrl}
-                  src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_1080/${open.public_id}.${open.format}`}
-                  className="rounded-lg object-contain"
-                  width={open.width}
-                  height={open.height}
-                />
-              </motion.div>
-              {selectedImage < images.length - 1 && (
+                exit={{ opacity: 0, y: 10, transition: { duration: 0.3 } }}>
+                <Swiper
+                  ref={sliderRef}
+                  initialSlide={selectedImage}
+                  modules={[Zoom, Keyboard, A11y]}
+                  enabled={open}
+                  keyboard
+                  zoom
+                  onRealIndexChange={(swiper) => setCurrIndex(swiper.realIndex)}
+                  className={`w-full sm:h-full ${
+                    open ? "opacity-100" : "opacity-0"
+                  } transition-all duration-100`}>
+                  {images.map((image, index) => (
+                    <SwiperSlide key={index}>
+                      <div className="relative flex h-full w-full flex-col items-center justify-center gap-16 overflow-hidden p-4 sm:p-14">
+                        <Image
+                          alt={image.id}
+                          placeholder="blur"
+                          quality={100}
+                          blurDataURL={image.blurDataUrl}
+                          src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_1080/${image.public_id}.${image.format}`}
+                          className="h-auto max-h-full w-auto max-w-full rounded-lg object-contain"
+                          width={image.width}
+                          height={image.height}
+                          priority
+                          onClick={(e) => e.stopPropagation()}
+                        />
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
                 <motion.div
-                  className="z-10 flex grow cursor-pointer justify-end pr-2 md:p-4"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setOpenImage(images[selectedImage + 1], selectedImage + 1);
-                  }}
+                  className="flex w-full items-center justify-evenly sm:pb-20"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{
                     opacity: 1,
                     y: 0,
-                    transition: { ease: easeIn, delay: 0.2, duration: 0.05 },
+                    transition: { delay: 0.2, duration: 0.3 },
                   }}
                   exit={{
                     opacity: 0,
-                    y: 20,
-                    transition: { ease: easeOut, delay: 0.05 },
+                    y: 10,
+                    transition: { delay: 0.2, duration: 0.3 },
                   }}>
-                  <ChevronRight />
+                  <button
+                    className="group rounded bg-white p-4 py-2 text-black"
+                    onClick={handlePrev}
+                    aria-label="previous image">
+                    <ChevronLeft className="duration-100 sm:group-hover:-translate-x-1" />
+                  </button>
+                  <p className="w-[5rem] text-center">
+                    {currIndex + 1} / {images.length}
+                  </p>
+                  <button
+                    className="group rounded bg-white p-4 py-2 text-black"
+                    onClick={handleNext}
+                    aria-label="next image">
+                    <ChevronRight className="duration-100 sm:group-hover:translate-x-1" />
+                  </button>
                 </motion.div>
-              )}
-            </div>
+              </motion.div>
+            }
           </>
         )}
       </AnimatePresence>

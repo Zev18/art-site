@@ -69,7 +69,7 @@ export default function SmallNav(props) {
         }
       `}</style>
 
-      <AnimatePresence key="navPresence sm:hidden">
+      <AnimatePresence key="navPresence" className="sm:hidden">
         {title !== "nah" && (
           <motion.div
             className={`${className} ${caffeineMono.className} pointer-events-none fixed z-[100] flex h-full w-full sm:hidden`}
@@ -78,8 +78,8 @@ export default function SmallNav(props) {
             exit={{ opacity: 0, y: 30 }}
             key="smallNav">
             <Popover className="relative bottom-0 w-full">
-              <div className="pointer-events-auto absolute inset-x-0 bottom-0 flex justify-center transition-all duration-100">
-                <div className="mb-4 flex max-w-max items-center justify-center gap-4 rounded-full bg-black/60 p-4 backdrop-blur">
+              <div className="absolute inset-x-0 bottom-0 flex justify-center transition-all duration-100">
+                <div className="pointer-events-auto mb-4 flex max-w-max items-center justify-center gap-4 rounded-full bg-black/60 p-4 backdrop-blur">
                   <Link
                     href={"/"}
                     className="duration-100 hover:opacity-60"
