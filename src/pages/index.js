@@ -79,7 +79,6 @@ export default function Home() {
               <h2 className={`${majorMono.className} mb-4 text-2xl`}>
                 {"i'm Zev. Welcome to my website!"}
               </h2>
-              <h2 className={`mb-4 text-2xl`}>{"Verification code: AC3429"}</h2>
               <p className="mb-2 text-lg text-slate-400">
                 {
                   "Here's where you can find all my socials, check out my work, get info about my commissions, and more."
