@@ -9,7 +9,7 @@ import discord from "../assets/discord.svg";
 import kofi from "../assets/ko-fi.svg";
 import pixiv from "../assets/Pixiv_Icon.svg";
 import misskey from "../assets/misskey.svg";
-import artistree from "../assets/artistree.svg";
+import cara from "../assets/cara.svg";
 import Metadata from "@/components/Metadata";
 
 const socialLinks = [
@@ -44,9 +44,9 @@ const socialLinks = [
     icon: kofi,
   },
   {
-    name: "Artistree",
-    url: "https://artistree.io/request/zevcandraw",
-    icon: artistree,
+    name: "Cara",
+    url: "https://cara.app/zevcandraw",
+    icon: cara,
   },
   {
     name: "Github",
