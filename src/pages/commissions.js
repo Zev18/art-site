@@ -4,8 +4,9 @@ import { Check, X } from "react-feather";
 import Head from "next/head";
 import { caffeineMono, majorMono } from "@/assets/fonts/fonts";
 import Metadata from "@/components/Metadata";
+import Link from "next/link";
 
-export const commissionStatus = "closed";
+export const commissionStatus = "open";
 
 export default function Commissions() {
   return (
@@ -65,14 +66,12 @@ export default function Commissions() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}>
-                Commissions can be ordered on{" "}
-                <a
-                  href="https://artistree.io/request/zevcandraw"
-                  className="cursor-pointer text-cyan-400"
-                  target="_blank">
-                  Artistree
-                </a>
-                .
+                <Link
+                  className="text-cyan-400 underline-offset-4 hover:underline"
+                  href="/contact">
+                  Contact me
+                </Link>{" "}
+                in order to set up a commission.
               </motion.div>
             )}
           </div>
@@ -94,13 +93,16 @@ export default function Commissions() {
               <div
                 className={`flex max-w-max flex-col gap-4 p-4 text-slate-400 ${caffeineMono.className}`}>
                 <p className="text-white">What I will draw:</p>
-                <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
                   <Check size={36} className="text-cyan-400" />
-                  <p>Mecha, complicated armor, ocs, fanart</p>
+                  <p>
+                    Mecha, complicated armor, ocs, humans with minor animal
+                    traits
+                  </p>
                 </div>
-                <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
                   <X size={36} className="text-rose-500" />
-                  <p>Furries, humans with animal traits, NSFW</p>
+                  <p>Furries, animals, NSFW</p>
                 </div>
               </div>
             </div>
